@@ -49,7 +49,7 @@ def next_date_calculation():
 
 def start(update, context):
     context.bot.send_message(chat_id=update.effective_chat.id, text="hello! thank you for using this bot")
-    context.bot.send_message(chat_id=update.effective_chat.id, text="here are some actions that you can carry out to get started: \n 1. /options - tells you what is today's Lunar Date or the next ChuYi/ShiWu 2. /notify - you can opt for this bot to remind you when the next day is ChuYi/ShiWu (still testing!)")
+    context.bot.send_message(chat_id=update.effective_chat.id, text="here are some actions that you can carry out to get started: \n 1. /options - tells you what is today's Lunar Date or the next ChuYi/ShiWu \n 2. /notify - you can opt for this bot to remind you when the next day is ChuYi/ShiWu (still testing!)")
 
 def notify(update, context):
     # on ChuYi/ShiWu, send notification 
