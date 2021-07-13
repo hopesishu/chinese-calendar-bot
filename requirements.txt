@@ -1,6 +1,7 @@
-
+APScheduler==3.6.3
 lunardate==0.2.0
 python-telegram-bot==13.7
+pytz==2021.1
 requests==2.25.1
-
-
+schedule==1.1.0
+tzlocal==2.1
