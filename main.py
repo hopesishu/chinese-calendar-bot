@@ -56,8 +56,7 @@ def notify(update, context):
     notify_date = next_date_calculation()
     gregorian_notify_date = notify_date[0]
 
-    context.bot.send_message(chat_id=update.effective_chat.id, text="you have successfully enabled notifications!")
-    context.bot.send_message(chat_id=update.effective_chat.id, text="you will now receive notifications on the next ChuYi/ShiWu (" + gregorian_notify_date.day + "/" + gregorian_notify_date.month + "/" + gregorian_notify_date.year + ") at 8am to remind you to be vegetarian :-)")
+    context.bot.send_message(chat_id=update.effective_chat.id, text="you have successfully enabled notifications!\n\nyou will now receive notifications on the next ChuYi/ShiWu (" + gregorian_notify_date.day + "/" + gregorian_notify_date.month + "/" + gregorian_notify_date.year + ") at 8am to remind you to be vegetarian :-)")
     morning = pytz.timezone('Asia/Singapore').localize(datetime.datetime(year=gregorian_notify_date.year, month=gregorian_notify_date.month, day=gregorian_notify_date.day, hour=8))
     context.job_queue.run_once(msg, when=morning, context=update.message.chat_id)
     # context.job_queue.run_daily(msg,
