@@ -49,7 +49,7 @@ def next_date_calculation():
 
 def start(update, context):
     context.bot.send_message(chat_id=update.effective_chat.id, text="hello! thank you for using this bot")
-    context.bot.send_message(chat_id=update.effective_chat.id, text="here are some actions that you can carry out to get started: \n 1. /options - tells you what is today's Lunar Date or the next ChuYi/ShiWu \n 2. /notify - you can opt for this bot to remind you when the next day is ChuYi/ShiWu (still testing!)")
+    context.bot.send_message(chat_id=update.effective_chat.id, text="here are some actions that you can carry out to get started: \n 1. /options - provide options to let you know today's Lunar Date or the next ChuYi/ShiWu \n 2. /notify - sends you notifications on the next upcoming ChuYi/ShiWu (still testing!) \n 3. /denotify - remove notifications that have been set")
 
 notify_flag = 0
 def notify(update, context):
@@ -60,21 +60,34 @@ def notify(update, context):
 
     if (notify_flag == 0):
         notify_flag = 1
-        context.bot.send_message(chat_id=update.effective_chat.id, text="you have successfully enabled notifications!\n\nyou will now receive notifications on the next ChuYi/ShiWu (" + str(gregorian_notify_date.day) + "/" + str(gregorian_notify_date.month) + "/" + str(gregorian_notify_date.year) + ") at 8am to remind you to be vegetarian :-)")
+        # print("notify notify_flag:" + str(notify_flag))
+        context.bot.send_message(chat_id=update.effective_chat.id, text="you have successfully enabled notifications!\n\nyou will now receive notifications on the next ChuYi/ShiWu (" + str(gregorian_notify_date.day) + "/" + str(gregorian_notify_date.month) + "/" + str(gregorian_notify_date.year) + ") at 8am to remind you to be vegetarian :-) \n\nif you wish to remove notifications, use /denotify")
         # morning = pytz.timezone('Asia/Singapore').localize(datetime.datetime(year=gregorian_notify_date.year, month=gregorian_notify_date.month, day=gregorian_notify_date.day, hour=8))
         # context.job_queue.run_once(msg, when=morning, context=update.message.chat_id)
         context.job_queue.run_daily(msg,
-                                    datetime.time(hour=14, minute=39, tzinfo=pytz.timezone('Asia/Singapore')),
-                                    days=(0, 1, 2, 3, 4, 5, 6), context=update.message.chat_id)
-        print(context.job_queue.jobs())
+                                    datetime.time(hour=15, minute=33, tzinfo=pytz.timezone('Asia/Singapore')),
+                                    days=(0, 1, 2, 3, 4, 5, 6), context=update.message.chat_id, name="testname")
     else:
-        context.bot.send_message(chat_id=update.effective_chat.id, text="you have already enabled notifications")
-        print(context.job_queue.jobs())
+        context.bot.send_message(chat_id=update.effective_chat.id, text="you have already enabled notifications \n\n if you wish to unsubscribe from these notifications, please use this command /denotify")
+        # print("notify else-loop notify_flag:" + str(notify_flag))
+    # print(context.job_queue.jobs())
 
 def msg(context):
+    global notify_flag
     notify_flag = 0
+    print("msg notify_flag:" + str(notify_flag))
     context.bot.send_message(chat_id=context.job.context, text='remember to eat vegetarian today!')
-    print("notify flag: " + str(notify_flag))
+
+def denotify(update, context):
+    global notify_flag 
+    notify_flag = 0
+
+    for job in context.job_queue.jobs():
+        job.schedule_removal()
+
+    context.bot.send_message(chat_id=update.effective_chat.id, text="you have successfully removed notifications \n\n if you wish to resubscribe to these notifications, please use this command /notify")
+    # print("denotify notify_flag:" + str(notify_flag))
+    # print(context.job_queue.jobs())
 
 def keyboard_options():
     """Sends a message with two inline buttons attached."""
@@ -102,24 +115,31 @@ def keyboard_button(update, context):
         date_list = date_calculation()
         gregorian_date = date_list[0]
         lunar_date = date_list[1]
+
+        if (gregorian_date == today):
+            answer = "yes! please eat vege today"
+        else:
+            answer = "nope! no need eat vege today"
+
         gregorian_date_str = "today's Gregorian date: " + str(day) + "/" + str(month) + "/" + str(year)
         lunar_date_str = "today's Lunar date: " + str(chinese_date.day) + "/" + str(chinese_date.month) + "/" + str(chinese_date.year)
-        reply = str(gregorian_date_str + "\n" + lunar_date_str)
+        reply = answer + "\n\n" + str(gregorian_date_str + "\n" + lunar_date_str)
 
         context.bot.send_message(chat_id=update.effective_chat.id, text=reply)
     elif (choice == "next_date"):
         date_list = next_date_calculation()
         gregorian_date = date_list[0]
         lunar_date = date_list[1]
+
         if (lunar_date.day == 1):
             chu = "ChuYi"
-        
         elif (lunar_date.day == 15): 
             chu = "ShiWu"
 
+        answer = "the upcoming " + chu + " is on " + str(gregorian_date.day) + "/" + str(gregorian_date.month) + "/" + str(gregorian_date.year) + ". if you wish to be notified on that day itself, please use this command /notify :)"
         gregorian_date_str = "next Gregorian " + chu + " date: " + str(gregorian_date.day) + "/" + str(gregorian_date.month) + "/" + str(gregorian_date.year)
         lunar_date_str = "next Lunar " + chu + " date: " + str(lunar_date.day) + "/" + str(lunar_date.month) + "/" + str(lunar_date.year)
-        reply = str(gregorian_date_str + "\n" + lunar_date_str)
+        reply = answer + "\n\n" + str(gregorian_date_str + "\n" + lunar_date_str)
 
         context.bot.send_message(chat_id=update.effective_chat.id, text=reply)
     # query.edit_message_text(text=f"Selected option: {query.data}")
@@ -134,6 +154,7 @@ def main():
     dp = updater.dispatcher
     dp.add_handler(CommandHandler("start", start))
     dp.add_handler(CommandHandler("notify", notify, pass_job_queue=True))
+    dp.add_handler(CommandHandler("denotify", denotify, pass_job_queue=True))
     dp.add_handler(CommandHandler("options", options))
     dp.add_handler(CallbackQueryHandler(keyboard_button))
     dp.add_handler(MessageHandler(Filters.text & (~Filters.command), start))
