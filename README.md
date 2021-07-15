@@ -5,7 +5,7 @@
 
 Table of Contents
 <ol>
-    <li><a href="#about">]About the Project</a></li>
+    <li><a href="#about">About the Project</a></li>
     <ul>
         <li><a href="#built-with">Built With</a></li>
     </ul>
