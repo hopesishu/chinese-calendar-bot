@@ -5,15 +5,15 @@
 
 Table of Contents
 <ol>
-    <li>[About the Project](#about)</li>
+    <li>[<a href="#about">]About the Project</a></li>
     <ul>
-        <li><a href="built-with">Built With</a></li>
+        <li><a href="#built-with">Built With</a></li>
     </ul>
-    <li><a href="usage">Usage</a></li>
-    <li><a href="contact">Contact</a></li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#contact">Contact</a></li>
 </ol>
 
-<h2 name="about">About the Project</h2>
+<h2 id="about">About the Project</h2>
 In today's era where Lunar calendars are rarely used in favour of the more common Gregorian calendar, people have become less aware of which Lunar date it is today. Manual checking of the Lunar calendar by looking through physical calendars or through an online Google search might be tiring and troublesome to some. Moreover, as Lunar calendars continue to be used throughout the world to determine religous festivals and national holidays, there is a need to always be aware of any important upcoming Lunar dates. 
 <br>
 Hence, the ChineseCalendar Bot was thus built with this in mind, where users are able to check what Lunar date today is. In addition, in Chinese culture, religous Buddhist people are strictly vegetarian on the 初一(chū yī) and 十五 (shí wǔ) of each Lunar month. This bot thus also provides a simple notification system to remind users to be vegetarian on these parituclar days. 
