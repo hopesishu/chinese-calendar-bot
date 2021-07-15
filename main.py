@@ -1,8 +1,8 @@
-import constants as keys
 from lunardate import *
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackQueryHandler, CallbackContext
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update, replymarkup
 import logging, datetime, pytz
+import os
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 logger = logging.getLogger()
@@ -150,7 +150,8 @@ def error(update, context):
     logger.warning('Update "%s" caused error "%s"', update, context.error)
 
 def main():
-    updater = Updater(keys.API_KEY, use_context=True)
+    API_KEY = os.environ.get('API_KEY')
+    updater = Updater(API_KEY, use_context=True)
     dp = updater.dispatcher
     dp.add_handler(CommandHandler("start", start))
     dp.add_handler(CommandHandler("notify", notify, pass_job_queue=True))
