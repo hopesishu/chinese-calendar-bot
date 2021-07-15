@@ -1,6 +1,6 @@
 # ChineseCalendarBot
 
-![image of botpic](https://github.com/hopesishu/chinese-calendar-bot/blob/main/images/botpic.png?raw=true)
+![image of botpic](https://github.com/hopesishu/chinese-calendar-bot/blob/main/images/botpic.png?raw=true){:height="20%"}
 
 
 
