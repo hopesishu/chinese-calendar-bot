@@ -3,7 +3,7 @@
 </p>
 <h3 align="center">ChineseCalendarBot</h3>
 
-<span align="center">A Telegram bot that helps convert Gregorian calendar dates into Lunar dates.</span> 
+<p align="center">A Telegram bot that helps convert Gregorian calendar dates into Lunar dates.</p> 
 
 <details>
      <summary>Table of Contents</summary>
