@@ -1,9 +1,13 @@
+<p align="center">
 <img src="https://github.com/hopesishu/chinese-calendar-bot/blob/main/images/botpic.png?raw=true" height="200" alt="picture of botpic" style="display: block; margin-left: auto; margin-right: auto">
-<h3 style="text-align: center">ChineseCalendarBot</h3>
+</p>
+<h3 align="center">ChineseCalendarBot</h3>
 
-<span style="text-align: center">A Telegram bot that helps convert Gregorian calendar dates into Lunar dates.</span> 
+<span align="center">A Telegram bot that helps convert Gregorian calendar dates into Lunar dates.</span> 
 
-Table of Contents
+<details>
+     <summary>Table of Contents</summary>
+
 <ol>
     <li><a href="#about">About the Project</a></li>
     <ul>
@@ -12,6 +16,7 @@ Table of Contents
     <li><a href="#usage">Usage</a></li>
     <li><a href="#contact">Contact</a></li>
 </ol>
+</details>
 
 <h2 id="about">About the Project</h2>
 In today's era where Lunar calendars are rarely used in favour of the more common Gregorian calendar, people have become less aware of which Lunar date it is today. Manual checking of the Lunar calendar by looking through physical calendars or through an online Google search might be tiring and troublesome to some. Moreover, as Lunar calendars continue to be used throughout the world to determine religous festivals and national holidays, there is a need to always be aware of any important upcoming Lunar dates. <br/><br/>
