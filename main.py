@@ -62,11 +62,11 @@ def notify(update, context):
         notify_flag = 1
         # print("notify notify_flag:" + str(notify_flag))
         context.bot.send_message(chat_id=update.effective_chat.id, text="you have successfully enabled notifications!\n\nyou will now receive notifications on the next ChuYi/ShiWu (" + str(gregorian_notify_date.day) + "/" + str(gregorian_notify_date.month) + "/" + str(gregorian_notify_date.year) + ") at 8am to remind you to be vegetarian :-) \n\nif you wish to remove notifications, use /denotify")
-        # morning = pytz.timezone('Asia/Singapore').localize(datetime.datetime(year=gregorian_notify_date.year, month=gregorian_notify_date.month, day=gregorian_notify_date.day, hour=8))
-        # context.job_queue.run_once(msg, when=morning, context=update.message.chat_id)
-        context.job_queue.run_daily(msg,
-                                    datetime.time(hour=15, minute=33, tzinfo=pytz.timezone('Asia/Singapore')),
-                                    days=(0, 1, 2, 3, 4, 5, 6), context=update.message.chat_id, name="testname")
+        morning = pytz.timezone('Asia/Singapore').localize(datetime.datetime(year=gregorian_notify_date.year, month=gregorian_notify_date.month, day=gregorian_notify_date.day, hour=8))
+        context.job_queue.run_once(msg, when=morning, context=update.message.chat_id)
+        # context.job_queue.run_daily(msg,
+        #                             datetime.time(hour=15, minute=33, tzinfo=pytz.timezone('Asia/Singapore')),
+        #                             days=(0, 1, 2, 3, 4, 5, 6), context=update.message.chat_id, name="testname")
     else:
         context.bot.send_message(chat_id=update.effective_chat.id, text="you have already enabled notifications \n\n if you wish to unsubscribe from these notifications, please use this command /denotify")
         # print("notify else-loop notify_flag:" + str(notify_flag))
