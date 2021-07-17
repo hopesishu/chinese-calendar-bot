@@ -1,8 +1,8 @@
+<h1>ChineseCalendarBot</h1>
+
 <p align="center">
 <img src="https://github.com/hopesishu/chinese-calendar-bot/blob/main/images/botpic.png?raw=true" height="200" alt="picture of botpic" style="display: block; margin-left: auto; margin-right: auto; border-radius: 50%">
 </p>
-<h3 align="center">ChineseCalendarBot</h3>
-
 <p align="center">A Telegram bot that helps convert Gregorian calendar dates into Lunar dates.</p> 
 
 <details>
