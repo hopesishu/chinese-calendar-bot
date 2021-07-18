@@ -21,6 +21,6 @@ selenium==3.141.0
 six==1.15.0
 tornado==6.1
 tzlocal==2.1
-urllib3==1.26.2
+urllib3>=1.26.5
 virtualenv==20.0.23
 Werkzeug==2.0.1
